@@ -10,6 +10,7 @@ public class LearningStormBolt extends BaseBasicBolt {
 	private static final long serialVersionUID = 1L;
 
 	public void execute(Tuple input, BasicOutputCollector collector) {
+		
 		// Fetch the field "site" from input tuple
 		String test = input.getStringByField("site");
 		
