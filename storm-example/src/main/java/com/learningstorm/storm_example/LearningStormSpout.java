@@ -10,6 +10,9 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseRichSpout;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 public class LearningStormSpout extends BaseRichSpout {
 	private static final long serialVersionUID = 1L;
@@ -28,6 +31,15 @@ public class LearningStormSpout extends BaseRichSpout {
 	public void nextTuple() {
 		// Storm cluster repeatedly calls this method to emit a continuous stream of tuples
 		final Random rand = new Random();
+		
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+		cb.setDebugEnabled(true)
+		  .setOAuthConsumerKey("*********************")
+		  .setOAuthConsumerSecret("******************************************")
+		  .setOAuthAccessToken("**************************************************")
+		  .setOAuthAccessTokenSecret("******************************************");
+		TwitterFactory tf = new TwitterFactory(cb.build());
+		Twitter twitter = tf.getInstance();
 		
 		// Generate the random number from 0 to 4.
 		int randomNumber = rand.nextInt(5);
